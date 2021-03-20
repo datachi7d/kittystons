@@ -5,6 +5,8 @@
  - Zoneminder:
    - Account with api permissions
    - ES (event service) enabled
+ - Slack:
+   - Slack bot token 
 
 ### Install
 

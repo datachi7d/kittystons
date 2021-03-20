@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+import os
+from kittystons.zm import run_kittystons
+
+
+run_kittystons(os.path.join(os.getcwd(), 'kittystons.json'))

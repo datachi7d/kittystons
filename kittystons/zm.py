@@ -72,9 +72,9 @@ class SlackZMEventNotification(ZMEventNotification):
 def run_kittystons(config_file):
     config_options = get_config(config_file)
     if config_options is not None:
+        slack_zm = SlackZMEventNotification(config_options)
         while True:
             try:
-                slack_zm = SlackZMEventNotification(config_options)
                 slack_zm.worker_thread.join(60.0)
                 print("Still running...")
             except Exception as e:

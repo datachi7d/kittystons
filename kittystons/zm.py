@@ -9,20 +9,15 @@ from tempfile import TemporaryDirectory
 from slack_sdk import WebClient
 
 
-def get_config(config_file_path='kittystons.json'):
-    with open(config_file_path) as config_file:
-        config_json = json.loads(config_file.read())
-
-        logger = ConsoleLog()
-        logger.set_level(2)
-        api_options = {
-            **config_json,
-            "logger": logger,  # use none if you don't want to log to ZM,
-            # 'disable_ssl_cert_check': True
-        }
-        return api_options
-
-    return None
+def get_config(config_json):
+    logger = ConsoleLog()
+    logger.set_level(2)
+    api_options = {
+        **config_json,
+        "logger": logger,  # use none if you don't want to log to ZM,
+        # 'disable_ssl_cert_check': True
+    }
+    return api_options
 
 
 def send_event(message, zmapi_client, slack_client, channel):
@@ -69,8 +64,8 @@ class SlackZMEventNotification(ZMEventNotification):
         print(f"Error: {error}")
 
 
-def run_kittystons(config_file):
-    config_options = get_config(config_file)
+def run_kittystons(config_json):
+    config_options = get_config(config_json)
     if config_options is not None:
         slack_zm = SlackZMEventNotification(config_options)
         while True:
